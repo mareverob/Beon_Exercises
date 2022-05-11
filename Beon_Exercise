@@ -1,0 +1,29 @@
+#Chromedriver
+from datetime import time
+
+from selenium import webdriver
+import selenium
+
+driver = webdriver.Chrome("/Users/NancyMareverObregonLeon/Documents/chromedriver")
+#Open the BeonPage!
+driver.get("https://beon.studio/")
+driver.maximize_window()
+
+#Click on join us!
+driver.implicitly_wait(8)
+search_box = driver.find_element_by_css_selector('a.join-us').click()
+
+#Choose any filter by selecting from the 3 dropdowns options
+driver.implicitly_wait(8)
+#Filter results in dropdown
+try:
+    #filters = driver.find_elements_by_css_selector("div#section-job-offers-container div select")
+    filters = driver.find_elements_by_xpath("//*[@id=section-job-offers-container]/div[1]/div[1]/select")
+    #print(len(filters))
+    for filter_option in filters:
+        time.sleep(4)
+        #print(filter_option.text)
+        if filter_option.text == "Android (1)":
+            filter_option.click()
+except:
+    raise
